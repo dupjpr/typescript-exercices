@@ -1,34 +1,29 @@
 import { useState } from 'react';
 import './App.css';
+import CustomButton from './componentes/customButton/CustomButton';
 
 function App() {
-  interface User {
-    name: string;
-  }
 
-  const [userName, setName] = useState<string>('')
-  const [lista, setLista] = useState<User[]>([])
+  const [num, setNum] = useState<number>(0);
 
-  const handleChange = (e: any) => {
-    const target = e.target;
-    setName(target.value);
+  function handleClick(e: MouseEvent, numero:number) {
+    setNum(num + numero)
   };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setLista([...lista, { name: userName }]);
-    setName('');
+  
+  function handleClickRest(e: MouseEvent, numero:number) {
+    setNum(num - numero)
   };
-
   return (
     <div className="App">
-      {lista.map((item) => (
-        <div key={item.name}>{item.name}</div>
-      ))}
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" value={userName} onChange={(e) => handleChange(e)} />
-        <input type="submit" value='send' />
-      </form>
+      {num}
+      <CustomButton
+        title='sumar'
+        onClick={(e: MouseEvent, numero: number = 3) => handleClick(e, numero)}
+      />
+      <CustomButton
+        title='restar'
+        onClick={(e: MouseEvent, numero: number = 1) => handleClickRest(e, numero)}
+      />
     </div>
   );
 }
