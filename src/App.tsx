@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './App.css';
+import CustomButton from './componentes/UI Library/button/CustomButton';
 
 function App() {
   interface User {
     name: string;
-  }
+  };
 
   const [userName, setName] = useState<string>('')
   const [lista, setLista] = useState<User[]>([])
@@ -27,7 +28,10 @@ function App() {
       ))}
       <form onSubmit={(e) => handleSubmit(e)}>
         <input type="text" value={userName} onChange={(e) => handleChange(e)} />
-        <input type="submit" value='send' />
+        <CustomButton
+          title='enviar'
+          inputType='submit'
+        />
       </form>
     </div>
   );
